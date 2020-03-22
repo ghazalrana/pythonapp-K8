@@ -8,6 +8,7 @@ In this article we will begin with expanding our knowledge on Kubernetes & conti
 Note: Deploying to Kubernetes requires a containerized application
 
 Prerequisites:
+----------------------------------
 
 Make sure you have system with ubuntu 18.04 with already installed:
 
@@ -18,6 +19,7 @@ Make sure you have system with ubuntu 18.04 with already installed:
 -->minikube
 
 The workflow will look like this:
+----------------------------------------
 
 1- We will create Dockerfiles for each service to build images.
 
@@ -34,6 +36,7 @@ The workflow will look like this:
 7-Expose the Pod using nodePort service.
 
 Step-01:
+-----------------
 
 -Clone the project from GitHub.
 
@@ -41,10 +44,12 @@ Step-01:
 
 
 Step-02:
+------------------------
 
 -Dockerize the Python App with Docker Compose.
 
 Step-03:
+-------------------------
 
 -Push your images to Docker Hub.
 
@@ -55,16 +60,21 @@ In my case the images that formed from Docker Compose were:
 ==> pythonk8_nginx
 
 One important thing to know is for pushing an image to docker hub,we need our images to be built as 
+---------------------------------------------------------------------------------------------------
 
 <hub-username>/repository-name:tag
-
+  
+  
+  
 -First you will have to re-tag your image with hub-username.
+-------------------------------------------------------------
 
 ==> $docker tag pythonk8_flask gzlkhan/pythonk8_flask
 
 ==> $docker tag pythonk8_nginx gzlkhan/pythonk8_nginx
 
 -Now you can push these images to Docker Hub by:
+------------------------------------------------
 
 ==> $docker image push gzlkhan/pythonk8_flask
 
@@ -72,6 +82,7 @@ One important thing to know is for pushing an image to docker hub,we need our im
 
 
 Deploy the Application to Kubernetes
+-------------------------------------
 
 For deployment of Python App to Kubernetes,we will create two important files:
 
@@ -88,6 +99,7 @@ In our case we have these two files as:
 
 
 Step-04:
+---------------------
 
 -Create a ConfigMap with Nginx configuration file.
 
@@ -96,6 +108,7 @@ A ConfigMap is a dictionary of key-value pairs that store configuration settings
 $kubectl create -f configmap1.yaml
 
 Step-05:
+--------------------------------
 
 -Create a multi-container Pod with flask app and nginx in separate containers.
 
@@ -106,6 +119,7 @@ Note we cannot access port 2020 from outside the port.We define only nginx port 
 We will populate a volume with data stored in ConfigMap.Add the ConfigMap name (python-nginx-conf) under the volumes section of Pod spec.This will add the ConfigMap data to the directory specified as volumeMounts.mountPath (/etc/nginx/nginx.conf)
 
 Step-06:
+--------------------------
 
 -Expose the Pod using the NodePort service:
 
@@ -116,6 +130,7 @@ service “pythonpod” exposed
 
 
 Step-07:
+----------------------
 
 Identify port on the node that is forwarded to the Pod by :
 
@@ -135,6 +150,7 @@ Now you can rush to your browser to navigate to your node’s port to access the
 Minikube-ip:NodePort
 
 192.168.99.100:32404
+----------------------------
 
 
 Note: You can get your minikube-IP by:
