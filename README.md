@@ -55,9 +55,9 @@ Step-03:
 
 In my case the images that formed from Docker Compose were:
 
-==> pythonk8_flask
+                   pythonk8_flask
+                   pythonk8_nginx
 
-==> pythonk8_nginx
 
 One important thing to know is for pushing an image to docker hub,we need our images to be built as 
 ---------------------------------------------------------------------------------------------------
@@ -71,16 +71,16 @@ One important thing to know is for pushing an image to docker hub,we need our im
 -First you will have to re-tag your image with hub-username.
 -------------------------------------------------------------
 
-==> $docker tag pythonk8_flask gzlkhan/pythonk8_flask
+             $docker tag pythonk8_flask gzlkhan/pythonk8_flask
 
-==> $docker tag pythonk8_nginx gzlkhan/pythonk8_nginx
+             $docker tag pythonk8_nginx gzlkhan/pythonk8_nginx
 
 -Now you can push these images to Docker Hub by:
 ------------------------------------------------
 
-==> $docker image push gzlkhan/pythonk8_flask
+           $docker image push gzlkhan/pythonk8_flask
 
-==> $docker image push gzlkhan/pythonk8_nginx
+            $docker image push gzlkhan/pythonk8_nginx
 
 
 Deploy the Application to Kubernetes
@@ -94,9 +94,9 @@ For deployment of Python App to Kubernetes,we will create two important files:
 
 In our case we have these two files as:
 
-==> configmap1.yaml
+           configmap1.yaml
 
-==> pods1.yaml
+           pods1.yaml
 
 
 
@@ -107,14 +107,14 @@ Step-04:
 
 A ConfigMap is a dictionary of key-value pairs that store configuration settings for your applications.
 
-$kubectl create -f configmap1.yaml
+                $kubectl create -f configmap1.yaml
 
 Step-05:
 --------------------------------
 
 -Create a multi-container Pod with flask app and nginx in separate containers.
 
-$kubectl create -f pods1.yaml
+             $kubectl create -f pods1.yaml
 
 Note we cannot access port 2020 from outside the port.We define only nginx port 80.Add ConfigMap in your Pods and use its configurations.
 
@@ -126,9 +126,9 @@ Step-06:
 -Expose the Pod using the NodePort service:
 
 
-$kubectl expose pod pythonpod --type=NodePort --port=80 
+              $kubectl expose pod pythonpod --type=NodePort --port=80 
 
-service “pythonpod” exposed
+              service “pythonpod” exposed
 
 
 Step-07:
@@ -136,20 +136,20 @@ Step-07:
 
 Identify port on the node that is forwarded to the Pod by :
 
-$kubectl describe service pythonpod
+             $kubectl describe service pythonpod
 
 
-...
+             ...
 
-NodePort: <unset> 32404/TCP
+            NodePort: <unset> 32404/TCP
 
-...
+            ...
 
 
 Now you can rush to your browser to navigate to your node’s port to access the web application through reverse proxy.
 
 
-Minikube-ip:NodePort
+               Minikube-ip:NodePort
 
 192.168.99.100:32404
 ----------------------------
@@ -157,4 +157,4 @@ Minikube-ip:NodePort
 
 Note: You can get your minikube-IP by:
 
-$ minikube ip
+                 $ minikube ip
