@@ -11,27 +11,27 @@ Prerequisites:
 
 Make sure you have system with ubuntu 18.04 with already installed:
 
-Docker Engine 
+-->Docker Engine 
 
-Docker Compose
+-->Docker Compose
 
-minikube
+-->minikube
 
 The workflow will look like this:
 
-We will create Dockerfiles for each service to build images.
+1- We will create Dockerfiles for each service to build images.
 
-We will create docker-compose.yml to run multiple containers together.
+2 -We will create docker-compose.yml to run multiple containers together.
 
-Deploy the entire stack with the docker compose command.
+3- Deploy the entire stack with the docker compose command.
 
-Pushing the docker images to docker hub.
+4- Pushing the docker images to docker hub.
 
-Create a ConfigMap with Nginx configuration file.
+5- Create a ConfigMap with Nginx configuration file.
 
-Create a multicontainer Pod (webapp and nginx in separate containers)
+6- Create a multicontainer Pod (webapp and nginx in separate containers)
 
-Expose the Pod using nodePort service.
+7-Expose the Pod using nodePort service.
 
 Step-01:
 
@@ -50,9 +50,9 @@ Step-03:
 
 In my case the images that formed from Docker Compose were:
 
-pythonk8_flask
+==> pythonk8_flask
 
-pythonk8_nginx
+==> pythonk8_nginx
 
 One important thing to know is for pushing an image to docker hub,we need our images to be built as 
 
@@ -60,30 +60,30 @@ One important thing to know is for pushing an image to docker hub,we need our im
 
 -First you will have to re-tag your image with hub-username.
 
-$docker tag pythonk8_flask gzlkhan/pythonk8_flask
+==> $docker tag pythonk8_flask gzlkhan/pythonk8_flask
 
-$docker tag pythonk8_nginx gzlkhan/pythonk8_nginx
+==> $docker tag pythonk8_nginx gzlkhan/pythonk8_nginx
 
 -Now you can push these images to Docker Hub by:
 
-$docker image push gzlkhan/pythonk8_flask
+==> $docker image push gzlkhan/pythonk8_flask
 
-$docker image push gzlkhan/pythonk8_nginx
+==> $docker image push gzlkhan/pythonk8_nginx
 
 
 Deploy the Application to Kubernetes
 
 For deployment of Python App to Kubernetes,we will create two important files:
 
-ConfigMap File 
+1- ConfigMap File 
 
-Pod File         
+2- Pod File         
 
 In our case we have these two files as:
 
-configmap1.yaml
+==> configmap1.yaml
 
-pods1.yaml
+==> pods1.yaml
 
 
 
