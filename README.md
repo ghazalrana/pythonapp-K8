@@ -62,7 +62,9 @@ In my case the images that formed from Docker Compose were:
 One important thing to know is for pushing an image to docker hub,we need our images to be built as 
 ---------------------------------------------------------------------------------------------------
 
-<hub-username>/repository-name:tag
+ 
+ 
+              <hub-username>/repository-name:tag
   
   
   
